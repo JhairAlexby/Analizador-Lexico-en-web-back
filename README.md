@@ -1,6 +1,6 @@
 # Analizador Léxico - Backend
 
-Este es el backend para un analizador léxico que identifica y clasifica tokens según reglas específicas.
+Este es el backend para un analizador léxico que identifica y clasifica tokens según reglas específicas. El proyecto está configurado para ser desplegado en Railway.
 
 ## Reglas de clasificación
 
@@ -17,6 +17,8 @@ Este es el backend para un analizador léxico que identifica y clasifica tokens 
 
 ## Cómo ejecutar
 
+### Localmente
+
 1. Asegúrate de tener Go instalado en tu sistema
 2. Navega al directorio del proyecto
 3. Ejecuta el servidor:
@@ -26,6 +28,13 @@ go run main.go
 ```
 
 El servidor se iniciará en http://localhost:8080
+
+### Despliegue en Railway
+
+1. Asegúrate de tener una cuenta en [Railway](https://railway.app/)
+2. Conecta tu repositorio de GitHub a Railway
+3. Railway detectará automáticamente que es un proyecto Go y utilizará el Procfile para iniciar la aplicación
+4. La variable de entorno `PORT` será configurada automáticamente por Railway
 
 ## API
 

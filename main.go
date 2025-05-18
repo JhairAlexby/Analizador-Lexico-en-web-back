@@ -4,48 +4,47 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 	"regexp"
 	"strings"
 )
 
 // TokenAnalysis contiene el resultado del análisis léxico
 type TokenAnalysis struct {
-	Tokens         []Token          `json:"tokens"`
-	TotalsByType   map[string]int   `json:"totalsByType"`
-	UniqueTokens   map[string]Token `json:"uniqueTokens"`
+	Tokens       []Token          `json:"tokens"`
+	TotalsByType map[string]int   `json:"totalsByType"`
+	UniqueTokens map[string]Token `json:"uniqueTokens"`
 }
 
 // Token representa un token identificado en el texto
 type Token struct {
 	Value string `json:"value"`
-	Type  string `json:"type"`  // "identificador", "numero", "error"
+	Type  string `json:"type"` // "identificador", "numero", "error"
 }
 
 func main() {
-	// Configurar rutas
 	http.HandleFunc("/analyze", corsMiddleware(analyzeHandler))
 
-	// Iniciar servidor
-	port := ":8080"
-	log.Printf("Servidor iniciado en http://localhost%s", port)
-	log.Fatal(http.ListenAndServe(port, nil))
+	portEnv := os.Getenv("PORT")
+	if portEnv == "" {
+		portEnv = "8080" // Puerto por defecto si no se especifica
+	}
+
+	log.Printf("Servidor iniciado en el puerto %s", portEnv)
+	log.Fatal(http.ListenAndServe(":"+portEnv, nil))
 }
 
-// corsMiddleware agrega los encabezados CORS necesarios
 func corsMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		// Configurar encabezados CORS
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
-		// Manejar solicitudes OPTIONS
 		if r.Method == "OPTIONS" {
 			w.WriteHeader(http.StatusOK)
 			return
 		}
 
-		// Continuar con el siguiente handler
 		next(w, r)
 	}
 }

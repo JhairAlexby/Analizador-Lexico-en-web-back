@@ -1,0 +1,32 @@
+# Binarios compilados
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Archivos de prueba
+*.test
+
+# Archivos de salida de cobertura
+*.out
+
+# Dependencias
+/vendor/
+
+# Archivos temporales
+*.tmp
+
+# Archivos de configuración local
+.env
+.env.local
+
+# Archivos de IDE y editores
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
