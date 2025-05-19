@@ -23,6 +23,7 @@ type Token struct {
 }
 
 func main() {
+	http.HandleFunc("/", corsMiddleware(healthCheckHandler))
 	http.HandleFunc("/analyze", corsMiddleware(analyzeHandler))
 	http.HandleFunc("/health", corsMiddleware(healthCheckHandler))
 
