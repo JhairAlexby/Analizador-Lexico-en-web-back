@@ -24,6 +24,7 @@ type Token struct {
 
 func main() {
 	http.HandleFunc("/analyze", corsMiddleware(analyzeHandler))
+	http.HandleFunc("/health", corsMiddleware(healthCheckHandler))
 
 	portEnv := os.Getenv("PORT")
 	if portEnv == "" {
@@ -47,6 +48,14 @@ func corsMiddleware(next http.HandlerFunc) http.HandlerFunc {
 
 		next(w, r)
 	}
+}
+
+// healthCheckHandler responde a las solicitudes de verificación de estado
+func healthCheckHandler(w http.ResponseWriter, r *http.Request) {
+	// Responder con un estado 200 OK y un mensaje simple
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
 }
 
 // analyzeHandler procesa la solicitud de análisis léxico
