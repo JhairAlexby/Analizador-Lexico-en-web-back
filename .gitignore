@@ -4,22 +4,16 @@
 *.dll
 *.so
 *.dylib
+main
 
 # Archivos de prueba
 *.test
 
-# Archivos de salida de cobertura
+# Archivos de cobertura
 *.out
 
 # Dependencias
 /vendor/
-
-# Archivos temporales
-*.tmp
-
-# Archivos de configuración local
-.env
-.env.local
 
 # Archivos de IDE y editores
 .idea/
@@ -27,6 +21,6 @@
 *.swp
 *.swo
 
-# Archivos de sistema operativo
+# Archivos del sistema operativo
 .DS_Store
 Thumbs.db
